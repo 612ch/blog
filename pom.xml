@@ -19,6 +19,11 @@
         <jjwt.version>0.9.0</jjwt.version>
         <jwt.version>3.2.0</jwt.version>
         <guava.version>25.1-jre</guava.version>
+        <mybatis.version>2.2.0</mybatis.version>
+        <pagehelper.version>1.3.0</pagehelper.version>
+        <mapper.version>2.1.5</mapper.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swaggerui.version>1.9.6</swaggerui.version>
     </properties>
     <dependencies>
         <dependency>
@@ -29,10 +34,44 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <!-- 分页助手启动器 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+        <!--jwt相关-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <!-- 通用mapper -->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>${mapper.version}</version>
+        </dependency>
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${spring.shiro.version}</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -45,7 +84,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <!--jwt相关-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -62,6 +100,18 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <!--swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <!--swagger-bootstrap-ui-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>swagger-bootstrap-ui</artifactId>
+            <version>${swaggerui.version}</version>
         </dependency>
 
     </dependencies>

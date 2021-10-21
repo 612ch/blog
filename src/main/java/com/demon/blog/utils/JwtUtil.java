@@ -17,19 +17,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class JwtUtil {
-/*
-*       <!--jwt相关-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${jjwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-            <version>${jwt.version}</version>
-        </dependency>
-* */
 
     /**
      * 过期时间1天
