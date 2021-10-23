@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demon.blog.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.demon.blog.pojo.Article">
+    <id column="art_id" jdbcType="INTEGER" property="artId" />
+    <result column="art_cate_id" jdbcType="INTEGER" property="artCateId" />
+    <result column="art_title" jdbcType="VARCHAR" property="artTitle" />
+    <result column="art_alias" jdbcType="VARCHAR" property="artAlias" />
+    <result column="art_keyword" jdbcType="VARCHAR" property="artKeyword" />
+    <result column="art_tag" jdbcType="VARCHAR" property="artTag" />
+    <result column="art_view_num" jdbcType="INTEGER" property="artViewNum" />
+    <result column="art_status" jdbcType="CHAR" property="artStatus" />
+    <result column="art_type" jdbcType="CHAR" property="artType" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="art_is_top" jdbcType="CHAR" property="artIsTop" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="delete_by" jdbcType="INTEGER" property="deleteBy" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.demon.blog.pojo.Article">
+    <result column="art_content" jdbcType="LONGVARCHAR" property="artContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    art_id, art_cate_id, art_title, art_alias, art_keyword, art_tag, art_view_num, art_status, 
+    art_type, del_flag, art_is_top, create_by, create_date, update_by, update_date, delete_by, 
+    delete_date
+  </sql>
+  <sql id="Blob_Column_List">
+    art_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cx_article
+    where art_id = #{artId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cx_article
+    where art_id = #{artId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.demon.blog.pojo.Article">
+    insert into cx_article (art_id, art_cate_id, art_title, 
+      art_alias, art_keyword, art_tag, 
+      art_view_num, art_status, art_type, 
+      del_flag, art_is_top, create_by, 
+      create_date, update_by, update_date, 
+      delete_by, delete_date, art_content
+      )
+    values (#{artId,jdbcType=INTEGER}, #{artCateId,jdbcType=INTEGER}, #{artTitle,jdbcType=VARCHAR}, 
+      #{artAlias,jdbcType=VARCHAR}, #{artKeyword,jdbcType=VARCHAR}, #{artTag,jdbcType=VARCHAR}, 
+      #{artViewNum,jdbcType=INTEGER}, #{artStatus,jdbcType=CHAR}, #{artType,jdbcType=CHAR}, 
+      #{delFlag,jdbcType=CHAR}, #{artIsTop,jdbcType=CHAR}, #{createBy,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{deleteBy,jdbcType=INTEGER}, #{deleteDate,jdbcType=TIMESTAMP}, #{artContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.demon.blog.pojo.Article">
+    insert into cx_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="artId != null">
+        art_id,
+      </if>
+      <if test="artCateId != null">
+        art_cate_id,
+      </if>
+      <if test="artTitle != null">
+        art_title,
+      </if>
+      <if test="artAlias != null">
+        art_alias,
+      </if>
+      <if test="artKeyword != null">
+        art_keyword,
+      </if>
+      <if test="artTag != null">
+        art_tag,
+      </if>
+      <if test="artViewNum != null">
+        art_view_num,
+      </if>
+      <if test="artStatus != null">
+        art_status,
+      </if>
+      <if test="artType != null">
+        art_type,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="artIsTop != null">
+        art_is_top,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="deleteBy != null">
+        delete_by,
+      </if>
+      <if test="deleteDate != null">
+        delete_date,
+      </if>
+      <if test="artContent != null">
+        art_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="artId != null">
+        #{artId,jdbcType=INTEGER},
+      </if>
+      <if test="artCateId != null">
+        #{artCateId,jdbcType=INTEGER},
+      </if>
+      <if test="artTitle != null">
+        #{artTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="artAlias != null">
+        #{artAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="artKeyword != null">
+        #{artKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="artTag != null">
+        #{artTag,jdbcType=VARCHAR},
+      </if>
+      <if test="artViewNum != null">
+        #{artViewNum,jdbcType=INTEGER},
+      </if>
+      <if test="artStatus != null">
+        #{artStatus,jdbcType=CHAR},
+      </if>
+      <if test="artType != null">
+        #{artType,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="artIsTop != null">
+        #{artIsTop,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        #{deleteBy,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="artContent != null">
+        #{artContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demon.blog.pojo.Article">
+    update cx_article
+    <set>
+      <if test="artCateId != null">
+        art_cate_id = #{artCateId,jdbcType=INTEGER},
+      </if>
+      <if test="artTitle != null">
+        art_title = #{artTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="artAlias != null">
+        art_alias = #{artAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="artKeyword != null">
+        art_keyword = #{artKeyword,jdbcType=VARCHAR},
+      </if>
+      <if test="artTag != null">
+        art_tag = #{artTag,jdbcType=VARCHAR},
+      </if>
+      <if test="artViewNum != null">
+        art_view_num = #{artViewNum,jdbcType=INTEGER},
+      </if>
+      <if test="artStatus != null">
+        art_status = #{artStatus,jdbcType=CHAR},
+      </if>
+      <if test="artType != null">
+        art_type = #{artType,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="artIsTop != null">
+        art_is_top = #{artIsTop,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        delete_by = #{deleteBy,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="artContent != null">
+        art_content = #{artContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where art_id = #{artId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.demon.blog.pojo.Article">
+    update cx_article
+    set art_cate_id = #{artCateId,jdbcType=INTEGER},
+      art_title = #{artTitle,jdbcType=VARCHAR},
+      art_alias = #{artAlias,jdbcType=VARCHAR},
+      art_keyword = #{artKeyword,jdbcType=VARCHAR},
+      art_tag = #{artTag,jdbcType=VARCHAR},
+      art_view_num = #{artViewNum,jdbcType=INTEGER},
+      art_status = #{artStatus,jdbcType=CHAR},
+      art_type = #{artType,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      art_is_top = #{artIsTop,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      delete_by = #{deleteBy,jdbcType=INTEGER},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      art_content = #{artContent,jdbcType=LONGVARCHAR}
+    where art_id = #{artId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demon.blog.pojo.Article">
+    update cx_article
+    set art_cate_id = #{artCateId,jdbcType=INTEGER},
+      art_title = #{artTitle,jdbcType=VARCHAR},
+      art_alias = #{artAlias,jdbcType=VARCHAR},
+      art_keyword = #{artKeyword,jdbcType=VARCHAR},
+      art_tag = #{artTag,jdbcType=VARCHAR},
+      art_view_num = #{artViewNum,jdbcType=INTEGER},
+      art_status = #{artStatus,jdbcType=CHAR},
+      art_type = #{artType,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      art_is_top = #{artIsTop,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      delete_by = #{deleteBy,jdbcType=INTEGER},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP}
+    where art_id = #{artId,jdbcType=INTEGER}
+  </update>
+</mapper>

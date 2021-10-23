@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demon.blog.mapper.ConfigMapper">
+  <resultMap id="BaseResultMap" type="com.demon.blog.pojo.Config">
+    <id column="conf_id" jdbcType="INTEGER" property="confId" />
+    <result column="conf_key" jdbcType="VARCHAR" property="confKey" />
+    <result column="conf_value" jdbcType="VARCHAR" property="confValue" />
+    <result column="conf_remarks" jdbcType="VARCHAR" property="confRemarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    conf_id, conf_key, conf_value, conf_remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cx_config
+    where conf_id = #{confId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cx_config
+    where conf_id = #{confId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.demon.blog.pojo.Config">
+    insert into cx_config (conf_id, conf_key, conf_value, 
+      conf_remarks)
+    values (#{confId,jdbcType=INTEGER}, #{confKey,jdbcType=VARCHAR}, #{confValue,jdbcType=VARCHAR}, 
+      #{confRemarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demon.blog.pojo.Config">
+    insert into cx_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="confId != null">
+        conf_id,
+      </if>
+      <if test="confKey != null">
+        conf_key,
+      </if>
+      <if test="confValue != null">
+        conf_value,
+      </if>
+      <if test="confRemarks != null">
+        conf_remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="confId != null">
+        #{confId,jdbcType=INTEGER},
+      </if>
+      <if test="confKey != null">
+        #{confKey,jdbcType=VARCHAR},
+      </if>
+      <if test="confValue != null">
+        #{confValue,jdbcType=VARCHAR},
+      </if>
+      <if test="confRemarks != null">
+        #{confRemarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demon.blog.pojo.Config">
+    update cx_config
+    <set>
+      <if test="confKey != null">
+        conf_key = #{confKey,jdbcType=VARCHAR},
+      </if>
+      <if test="confValue != null">
+        conf_value = #{confValue,jdbcType=VARCHAR},
+      </if>
+      <if test="confRemarks != null">
+        conf_remarks = #{confRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where conf_id = #{confId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demon.blog.pojo.Config">
+    update cx_config
+    set conf_key = #{confKey,jdbcType=VARCHAR},
+      conf_value = #{confValue,jdbcType=VARCHAR},
+      conf_remarks = #{confRemarks,jdbcType=VARCHAR}
+    where conf_id = #{confId,jdbcType=INTEGER}
+  </update>
+</mapper>

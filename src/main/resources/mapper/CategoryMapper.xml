@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demon.blog.mapper.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.demon.blog.pojo.Category">
+    <id column="cate_id" jdbcType="INTEGER" property="cateId" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+    <result column="cate_alias" jdbcType="VARCHAR" property="cateAlias" />
+    <result column="cate_keywords" jdbcType="VARCHAR" property="cateKeywords" />
+    <result column="cate_remarks" jdbcType="VARCHAR" property="cateRemarks" />
+    <result column="cate_parent" jdbcType="INTEGER" property="cateParent" />
+    <result column="cate_create_by" jdbcType="INTEGER" property="cateCreateBy" />
+    <result column="cate_create_date" jdbcType="TIMESTAMP" property="cateCreateDate" />
+    <result column="cate_update_by" jdbcType="INTEGER" property="cateUpdateBy" />
+    <result column="cate_update_date" jdbcType="TIMESTAMP" property="cateUpdateDate" />
+    <result column="cate_delete_by" jdbcType="INTEGER" property="cateDeleteBy" />
+    <result column="cate_delete_date" jdbcType="TIMESTAMP" property="cateDeleteDate" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cate_id, cate_name, cate_alias, cate_keywords, cate_remarks, cate_parent, cate_create_by, 
+    cate_create_date, cate_update_by, cate_update_date, cate_delete_by, cate_delete_date, 
+    del_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cx_category
+    where cate_id = #{cateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cx_category
+    where cate_id = #{cateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.demon.blog.pojo.Category">
+    insert into cx_category (cate_id, cate_name, cate_alias, 
+      cate_keywords, cate_remarks, cate_parent, 
+      cate_create_by, cate_create_date, cate_update_by, 
+      cate_update_date, cate_delete_by, cate_delete_date, 
+      del_flag)
+    values (#{cateId,jdbcType=INTEGER}, #{cateName,jdbcType=VARCHAR}, #{cateAlias,jdbcType=VARCHAR}, 
+      #{cateKeywords,jdbcType=VARCHAR}, #{cateRemarks,jdbcType=VARCHAR}, #{cateParent,jdbcType=INTEGER}, 
+      #{cateCreateBy,jdbcType=INTEGER}, #{cateCreateDate,jdbcType=TIMESTAMP}, #{cateUpdateBy,jdbcType=INTEGER}, 
+      #{cateUpdateDate,jdbcType=TIMESTAMP}, #{cateDeleteBy,jdbcType=INTEGER}, #{cateDeleteDate,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demon.blog.pojo.Category">
+    insert into cx_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cateId != null">
+        cate_id,
+      </if>
+      <if test="cateName != null">
+        cate_name,
+      </if>
+      <if test="cateAlias != null">
+        cate_alias,
+      </if>
+      <if test="cateKeywords != null">
+        cate_keywords,
+      </if>
+      <if test="cateRemarks != null">
+        cate_remarks,
+      </if>
+      <if test="cateParent != null">
+        cate_parent,
+      </if>
+      <if test="cateCreateBy != null">
+        cate_create_by,
+      </if>
+      <if test="cateCreateDate != null">
+        cate_create_date,
+      </if>
+      <if test="cateUpdateBy != null">
+        cate_update_by,
+      </if>
+      <if test="cateUpdateDate != null">
+        cate_update_date,
+      </if>
+      <if test="cateDeleteBy != null">
+        cate_delete_by,
+      </if>
+      <if test="cateDeleteDate != null">
+        cate_delete_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cateId != null">
+        #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="cateName != null">
+        #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateAlias != null">
+        #{cateAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="cateKeywords != null">
+        #{cateKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="cateRemarks != null">
+        #{cateRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="cateParent != null">
+        #{cateParent,jdbcType=INTEGER},
+      </if>
+      <if test="cateCreateBy != null">
+        #{cateCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="cateCreateDate != null">
+        #{cateCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cateUpdateBy != null">
+        #{cateUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="cateUpdateDate != null">
+        #{cateUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cateDeleteBy != null">
+        #{cateDeleteBy,jdbcType=INTEGER},
+      </if>
+      <if test="cateDeleteDate != null">
+        #{cateDeleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demon.blog.pojo.Category">
+    update cx_category
+    <set>
+      <if test="cateName != null">
+        cate_name = #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateAlias != null">
+        cate_alias = #{cateAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="cateKeywords != null">
+        cate_keywords = #{cateKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="cateRemarks != null">
+        cate_remarks = #{cateRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="cateParent != null">
+        cate_parent = #{cateParent,jdbcType=INTEGER},
+      </if>
+      <if test="cateCreateBy != null">
+        cate_create_by = #{cateCreateBy,jdbcType=INTEGER},
+      </if>
+      <if test="cateCreateDate != null">
+        cate_create_date = #{cateCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cateUpdateBy != null">
+        cate_update_by = #{cateUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="cateUpdateDate != null">
+        cate_update_date = #{cateUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cateDeleteBy != null">
+        cate_delete_by = #{cateDeleteBy,jdbcType=INTEGER},
+      </if>
+      <if test="cateDeleteDate != null">
+        cate_delete_date = #{cateDeleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where cate_id = #{cateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demon.blog.pojo.Category">
+    update cx_category
+    set cate_name = #{cateName,jdbcType=VARCHAR},
+      cate_alias = #{cateAlias,jdbcType=VARCHAR},
+      cate_keywords = #{cateKeywords,jdbcType=VARCHAR},
+      cate_remarks = #{cateRemarks,jdbcType=VARCHAR},
+      cate_parent = #{cateParent,jdbcType=INTEGER},
+      cate_create_by = #{cateCreateBy,jdbcType=INTEGER},
+      cate_create_date = #{cateCreateDate,jdbcType=TIMESTAMP},
+      cate_update_by = #{cateUpdateBy,jdbcType=INTEGER},
+      cate_update_date = #{cateUpdateDate,jdbcType=TIMESTAMP},
+      cate_delete_by = #{cateDeleteBy,jdbcType=INTEGER},
+      cate_delete_date = #{cateDeleteDate,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where cate_id = #{cateId,jdbcType=INTEGER}
+  </update>
+</mapper>

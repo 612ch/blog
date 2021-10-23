@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demon.blog.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.demon.blog.pojo.Comment">
+    <id column="comm_id" jdbcType="INTEGER" property="commId" />
+    <result column="comm_status" jdbcType="CHAR" property="commStatus" />
+    <result column="comm_name" jdbcType="VARCHAR" property="commName" />
+    <result column="comm_email" jdbcType="VARCHAR" property="commEmail" />
+    <result column="comm_home_page" jdbcType="VARCHAR" property="commHomePage" />
+    <result column="comm_ip" jdbcType="VARCHAR" property="commIp" />
+    <result column="comm_agent" jdbcType="VARCHAR" property="commAgent" />
+    <result column="comm_parent" jdbcType="INTEGER" property="commParent" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="delete_by" jdbcType="INTEGER" property="deleteBy" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.demon.blog.pojo.Comment">
+    <result column="comm_content" jdbcType="LONGVARCHAR" property="commContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    comm_id, comm_status, comm_name, comm_email, comm_home_page, comm_ip, comm_agent, 
+    comm_parent, del_flag, create_by, create_date, delete_by, delete_date
+  </sql>
+  <sql id="Blob_Column_List">
+    comm_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cx_comment
+    where comm_id = #{commId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cx_comment
+    where comm_id = #{commId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.demon.blog.pojo.Comment">
+    insert into cx_comment (comm_id, comm_status, comm_name, 
+      comm_email, comm_home_page, comm_ip, 
+      comm_agent, comm_parent, del_flag, 
+      create_by, create_date, delete_by, 
+      delete_date, comm_content)
+    values (#{commId,jdbcType=INTEGER}, #{commStatus,jdbcType=CHAR}, #{commName,jdbcType=VARCHAR}, 
+      #{commEmail,jdbcType=VARCHAR}, #{commHomePage,jdbcType=VARCHAR}, #{commIp,jdbcType=VARCHAR}, 
+      #{commAgent,jdbcType=VARCHAR}, #{commParent,jdbcType=INTEGER}, #{delFlag,jdbcType=CHAR}, 
+      #{createBy,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{deleteBy,jdbcType=INTEGER}, 
+      #{deleteDate,jdbcType=TIMESTAMP}, #{commContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demon.blog.pojo.Comment">
+    insert into cx_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commId != null">
+        comm_id,
+      </if>
+      <if test="commStatus != null">
+        comm_status,
+      </if>
+      <if test="commName != null">
+        comm_name,
+      </if>
+      <if test="commEmail != null">
+        comm_email,
+      </if>
+      <if test="commHomePage != null">
+        comm_home_page,
+      </if>
+      <if test="commIp != null">
+        comm_ip,
+      </if>
+      <if test="commAgent != null">
+        comm_agent,
+      </if>
+      <if test="commParent != null">
+        comm_parent,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="deleteBy != null">
+        delete_by,
+      </if>
+      <if test="deleteDate != null">
+        delete_date,
+      </if>
+      <if test="commContent != null">
+        comm_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commId != null">
+        #{commId,jdbcType=INTEGER},
+      </if>
+      <if test="commStatus != null">
+        #{commStatus,jdbcType=CHAR},
+      </if>
+      <if test="commName != null">
+        #{commName,jdbcType=VARCHAR},
+      </if>
+      <if test="commEmail != null">
+        #{commEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="commHomePage != null">
+        #{commHomePage,jdbcType=VARCHAR},
+      </if>
+      <if test="commIp != null">
+        #{commIp,jdbcType=VARCHAR},
+      </if>
+      <if test="commAgent != null">
+        #{commAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="commParent != null">
+        #{commParent,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        #{deleteBy,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commContent != null">
+        #{commContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demon.blog.pojo.Comment">
+    update cx_comment
+    <set>
+      <if test="commStatus != null">
+        comm_status = #{commStatus,jdbcType=CHAR},
+      </if>
+      <if test="commName != null">
+        comm_name = #{commName,jdbcType=VARCHAR},
+      </if>
+      <if test="commEmail != null">
+        comm_email = #{commEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="commHomePage != null">
+        comm_home_page = #{commHomePage,jdbcType=VARCHAR},
+      </if>
+      <if test="commIp != null">
+        comm_ip = #{commIp,jdbcType=VARCHAR},
+      </if>
+      <if test="commAgent != null">
+        comm_agent = #{commAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="commParent != null">
+        comm_parent = #{commParent,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        delete_by = #{deleteBy,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commContent != null">
+        comm_content = #{commContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where comm_id = #{commId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.demon.blog.pojo.Comment">
+    update cx_comment
+    set comm_status = #{commStatus,jdbcType=CHAR},
+      comm_name = #{commName,jdbcType=VARCHAR},
+      comm_email = #{commEmail,jdbcType=VARCHAR},
+      comm_home_page = #{commHomePage,jdbcType=VARCHAR},
+      comm_ip = #{commIp,jdbcType=VARCHAR},
+      comm_agent = #{commAgent,jdbcType=VARCHAR},
+      comm_parent = #{commParent,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      delete_by = #{deleteBy,jdbcType=INTEGER},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      comm_content = #{commContent,jdbcType=LONGVARCHAR}
+    where comm_id = #{commId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demon.blog.pojo.Comment">
+    update cx_comment
+    set comm_status = #{commStatus,jdbcType=CHAR},
+      comm_name = #{commName,jdbcType=VARCHAR},
+      comm_email = #{commEmail,jdbcType=VARCHAR},
+      comm_home_page = #{commHomePage,jdbcType=VARCHAR},
+      comm_ip = #{commIp,jdbcType=VARCHAR},
+      comm_agent = #{commAgent,jdbcType=VARCHAR},
+      comm_parent = #{commParent,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      delete_by = #{deleteBy,jdbcType=INTEGER},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP}
+    where comm_id = #{commId,jdbcType=INTEGER}
+  </update>
+</mapper>

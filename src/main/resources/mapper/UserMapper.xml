@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demon.blog.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.demon.blog.pojo.User">
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="u_name" jdbcType="VARCHAR" property="uName" />
+    <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
+    <result column="u_salt" jdbcType="VARCHAR" property="uSalt" />
+    <result column="u_uuid" jdbcType="VARCHAR" property="uUuid" />
+    <result column="u_level" jdbcType="INTEGER" property="uLevel" />
+    <result column="u_email" jdbcType="VARCHAR" property="uEmail" />
+    <result column="u_qq" jdbcType="VARCHAR" property="uQq" />
+    <result column="u_phone" jdbcType="VARCHAR" property="uPhone" />
+    <result column="u_github" jdbcType="VARCHAR" property="uGithub" />
+    <result column="u_gitee" jdbcType="VARCHAR" property="uGitee" />
+    <result column="u_wechat" jdbcType="VARCHAR" property="uWechat" />
+    <result column="u_home_page" jdbcType="VARCHAR" property="uHomePage" />
+    <result column="u_alias" jdbcType="VARCHAR" property="uAlias" />
+    <result column="u_status" jdbcType="CHAR" property="uStatus" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="u_login_ip" jdbcType="VARCHAR" property="uLoginIp" />
+    <result column="u_last_login_ip" jdbcType="VARCHAR" property="uLastLoginIp" />
+    <result column="u_create_by" jdbcType="VARCHAR" property="uCreateBy" />
+    <result column="u_create_date" jdbcType="TIMESTAMP" property="uCreateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    u_id, u_name, u_password, u_salt, u_uuid, u_level, u_email, u_qq, u_phone, u_github, 
+    u_gitee, u_wechat, u_home_page, u_alias, u_status, del_flag, u_login_ip, u_last_login_ip, 
+    u_create_by, u_create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cx_user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cx_user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.demon.blog.pojo.User">
+    insert into cx_user (u_id, u_name, u_password, 
+      u_salt, u_uuid, u_level, 
+      u_email, u_qq, u_phone, 
+      u_github, u_gitee, u_wechat, 
+      u_home_page, u_alias, u_status, 
+      del_flag, u_login_ip, u_last_login_ip, 
+      u_create_by, u_create_date)
+    values (#{uId,jdbcType=INTEGER}, #{uName,jdbcType=VARCHAR}, #{uPassword,jdbcType=VARCHAR}, 
+      #{uSalt,jdbcType=VARCHAR}, #{uUuid,jdbcType=VARCHAR}, #{uLevel,jdbcType=INTEGER}, 
+      #{uEmail,jdbcType=VARCHAR}, #{uQq,jdbcType=VARCHAR}, #{uPhone,jdbcType=VARCHAR}, 
+      #{uGithub,jdbcType=VARCHAR}, #{uGitee,jdbcType=VARCHAR}, #{uWechat,jdbcType=VARCHAR}, 
+      #{uHomePage,jdbcType=VARCHAR}, #{uAlias,jdbcType=VARCHAR}, #{uStatus,jdbcType=CHAR}, 
+      #{delFlag,jdbcType=CHAR}, #{uLoginIp,jdbcType=VARCHAR}, #{uLastLoginIp,jdbcType=VARCHAR}, 
+      #{uCreateBy,jdbcType=VARCHAR}, #{uCreateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demon.blog.pojo.User">
+    insert into cx_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uName != null">
+        u_name,
+      </if>
+      <if test="uPassword != null">
+        u_password,
+      </if>
+      <if test="uSalt != null">
+        u_salt,
+      </if>
+      <if test="uUuid != null">
+        u_uuid,
+      </if>
+      <if test="uLevel != null">
+        u_level,
+      </if>
+      <if test="uEmail != null">
+        u_email,
+      </if>
+      <if test="uQq != null">
+        u_qq,
+      </if>
+      <if test="uPhone != null">
+        u_phone,
+      </if>
+      <if test="uGithub != null">
+        u_github,
+      </if>
+      <if test="uGitee != null">
+        u_gitee,
+      </if>
+      <if test="uWechat != null">
+        u_wechat,
+      </if>
+      <if test="uHomePage != null">
+        u_home_page,
+      </if>
+      <if test="uAlias != null">
+        u_alias,
+      </if>
+      <if test="uStatus != null">
+        u_status,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="uLoginIp != null">
+        u_login_ip,
+      </if>
+      <if test="uLastLoginIp != null">
+        u_last_login_ip,
+      </if>
+      <if test="uCreateBy != null">
+        u_create_by,
+      </if>
+      <if test="uCreateDate != null">
+        u_create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uName != null">
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPassword != null">
+        #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uSalt != null">
+        #{uSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="uUuid != null">
+        #{uUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="uLevel != null">
+        #{uLevel,jdbcType=INTEGER},
+      </if>
+      <if test="uEmail != null">
+        #{uEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uQq != null">
+        #{uQq,jdbcType=VARCHAR},
+      </if>
+      <if test="uPhone != null">
+        #{uPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="uGithub != null">
+        #{uGithub,jdbcType=VARCHAR},
+      </if>
+      <if test="uGitee != null">
+        #{uGitee,jdbcType=VARCHAR},
+      </if>
+      <if test="uWechat != null">
+        #{uWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="uHomePage != null">
+        #{uHomePage,jdbcType=VARCHAR},
+      </if>
+      <if test="uAlias != null">
+        #{uAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="uStatus != null">
+        #{uStatus,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="uLoginIp != null">
+        #{uLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="uLastLoginIp != null">
+        #{uLastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="uCreateBy != null">
+        #{uCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="uCreateDate != null">
+        #{uCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demon.blog.pojo.User">
+    update cx_user
+    <set>
+      <if test="uName != null">
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uPassword != null">
+        u_password = #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uSalt != null">
+        u_salt = #{uSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="uUuid != null">
+        u_uuid = #{uUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="uLevel != null">
+        u_level = #{uLevel,jdbcType=INTEGER},
+      </if>
+      <if test="uEmail != null">
+        u_email = #{uEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uQq != null">
+        u_qq = #{uQq,jdbcType=VARCHAR},
+      </if>
+      <if test="uPhone != null">
+        u_phone = #{uPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="uGithub != null">
+        u_github = #{uGithub,jdbcType=VARCHAR},
+      </if>
+      <if test="uGitee != null">
+        u_gitee = #{uGitee,jdbcType=VARCHAR},
+      </if>
+      <if test="uWechat != null">
+        u_wechat = #{uWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="uHomePage != null">
+        u_home_page = #{uHomePage,jdbcType=VARCHAR},
+      </if>
+      <if test="uAlias != null">
+        u_alias = #{uAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="uStatus != null">
+        u_status = #{uStatus,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="uLoginIp != null">
+        u_login_ip = #{uLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="uLastLoginIp != null">
+        u_last_login_ip = #{uLastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="uCreateBy != null">
+        u_create_by = #{uCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="uCreateDate != null">
+        u_create_date = #{uCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demon.blog.pojo.User">
+    update cx_user
+    set u_name = #{uName,jdbcType=VARCHAR},
+      u_password = #{uPassword,jdbcType=VARCHAR},
+      u_salt = #{uSalt,jdbcType=VARCHAR},
+      u_uuid = #{uUuid,jdbcType=VARCHAR},
+      u_level = #{uLevel,jdbcType=INTEGER},
+      u_email = #{uEmail,jdbcType=VARCHAR},
+      u_qq = #{uQq,jdbcType=VARCHAR},
+      u_phone = #{uPhone,jdbcType=VARCHAR},
+      u_github = #{uGithub,jdbcType=VARCHAR},
+      u_gitee = #{uGitee,jdbcType=VARCHAR},
+      u_wechat = #{uWechat,jdbcType=VARCHAR},
+      u_home_page = #{uHomePage,jdbcType=VARCHAR},
+      u_alias = #{uAlias,jdbcType=VARCHAR},
+      u_status = #{uStatus,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      u_login_ip = #{uLoginIp,jdbcType=VARCHAR},
+      u_last_login_ip = #{uLastLoginIp,jdbcType=VARCHAR},
+      u_create_by = #{uCreateBy,jdbcType=VARCHAR},
+      u_create_date = #{uCreateDate,jdbcType=TIMESTAMP}
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+</mapper>
